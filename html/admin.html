@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Course - Admin Panel</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include your custom CSS (if any) -->
+    <link rel="stylesheet" href="../css/style1.css">
+    <style>
+        /* Add custom CSS for validation error message */
+        .validation-error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!-- Container for the form -->
+    <div class="container mt-4">
+        <h2 style="color: rgb(205, 173, 9);">ADD COURSE</h2>
+        <form id="courseForm" action="../php/newcourse.php" method="POST">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="courseName" style="color: green;">Course Name:</label>
+                    <input type="text" class="form-control" id="courseName" name="courseName" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="pagesSlides" style="color: green;">Pages/Slides:</label>
+                    <input type="number" class="form-control" id="pagesSlides" name="pagesSlides" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="remaining" style="color: green;">Remaining:</label>
+                    <input type="number" class="form-control" id="remaining" name="remaining" required>
+                    <!-- Validation error message -->
+                    <span class="validation-error" id="remainingError"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="days" style="color: green;">Days:</label>
+                    <input type="number" class="form-control" id="days" name="days" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Course</button>
+        </form>
+    </div>
+    
+
+    <!-- Include Bootstrap JS and your custom JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        // JavaScript for form validation
+        document.getElementById('courseForm').addEventListener('submit', function(event) {
+            const pagesSlides = parseInt(document.getElementById('pagesSlides').value);
+            const remaining = parseInt(document.getElementById('remaining').value);
+
+            // Check if Remaining is greater than Pages/Slides
+            if (remaining > pagesSlides) {
+                event.preventDefault(); // Prevent form submission
+                document.getElementById('remainingError').textContent = 'Remaining cannot be greater than Pages/Slides';
+            } else {
+                // Clear any previous error message
+                document.getElementById('remainingError').textContent = '';
+            }
+        });
+    </script>
+</body>
+</html>
